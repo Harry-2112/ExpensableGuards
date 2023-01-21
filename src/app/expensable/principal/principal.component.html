@@ -1,0 +1,37 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav bg-light" fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>{{titulo}}</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['./categorias']" (click)="cambiarTitulo('categories')"><i
+          class="fa fa-address-card text-primary"></i> Categories</a>
+      <a mat-list-item [routerLink]="['./transactions']" (click)="cambiarTitulo('transactions')"><i
+          class="fa fa-list-alt text-primary"></i> Transactions</a>
+      <a mat-list-item [routerLink]="['./budgets']" (click)="cambiarTitulo('budgets')"><i
+          class="fa-solid fa-record-vinyl text-primary"></i> Budgets</a>
+    </mat-nav-list>
+
+    <div class="data">
+      <div class="user">
+        <h3>{{name}}</h3>
+        <p>{{email}}</p>
+      </div>
+      <div class="logout">
+        <button class="btn btn-danger mt-3" (click)="salir()">LogOut</button>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar>
+      {{titleApp | titlecase}}
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

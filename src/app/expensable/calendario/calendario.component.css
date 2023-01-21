@@ -1,0 +1,26 @@
+.container .calendar__info,
+.datos {
+  display: flex;
+  border-radius: 20px;
+}
+
+.datos,
+.calendar__next,
+.calendar__prev {
+  background: #F3F4F6;
+  padding: 15px;
+}
+
+.calendar__next,
+.calendar__prev {
+  border-radius: 50%;
+}
+
+button {
+  border: none;
+}
+
+.container {
+  display: grid;
+  place-content: center;
+}

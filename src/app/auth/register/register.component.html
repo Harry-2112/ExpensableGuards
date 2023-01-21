@@ -1,0 +1,56 @@
+<div class="container text-center">
+  <mat-card class="content-form">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com" id="email"
+            name="email" require formControlName="email">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput placeholder="Password" id="password" name="password" require
+            formControlName="password">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Name</mat-label>
+          <input type="text" matInput placeholder="Jose Luis Miranda" id="name" name="name" require
+            formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Confirm Password</mat-label>
+          <input type="password" matInput placeholder="Password" id="ConfirmPass" name="ConfirmPass" require
+            formControlName="ConfirmPass">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Phone</mat-label>
+          <input type="tel" matInput placeholder="958-584-777" id="phone" name="phone" require formControlName="phone">
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <button class="btn btn-success w-75 py-2 mt-4 mb-2">Register</button>
+      <br>
+      <span>Ya tienes una cuenta? </span> <a class="nav-link text-primary" [routerLink]="['/login']">Login</a>
+
+
+      <!-- <span class="nav-tool-items">
+        <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
+      </span> -->
+    </form>
+  </mat-card>
+</div>

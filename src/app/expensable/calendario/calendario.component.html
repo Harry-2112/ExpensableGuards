@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="calendar__info">
+    <button class="calendar__prev" (click)="lastMonth()">&#9664;</button>
+    <div class="datos fs-6 mx-4">
+      <div class="calendar__month pe-2" id="month"><b>{{month}}</b></div>
+      <div class="calendar__year" id="year"><b>{{year}}</b></div>
+    </div>
+    <button class="calendar__next" (click)="nextMonth()">&#9654;</button>
+  </div>
+</div>

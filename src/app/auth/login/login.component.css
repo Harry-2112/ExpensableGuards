@@ -1,0 +1,19 @@
+.container {
+  width: 90%;
+  height: 90%;
+  display: grid;
+  place-content: center;
+}
+
+.content-form {
+  width: 400px;
+  height: auto;
+}
+
+mat-form-field {
+  display: block;
+}
+
+.nav-link {
+  display: inline;
+}

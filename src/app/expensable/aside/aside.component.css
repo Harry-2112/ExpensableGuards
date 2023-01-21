@@ -1,0 +1,28 @@
+.filter {
+  float: right;
+}
+
+.form label {
+  margin-right: 15px;
+}
+
+.icon-transaction {
+  padding-top: 13px;
+}
+
+.icon-transaction i {
+  padding: 5px 7px;
+  border-radius: 50%;
+  color: white;
+  font-size: 15px;
+}
+
+.list-group-item {
+  height: 100px;
+  font-size: 30px;
+}
+
+.filter:hover {
+  cursor: pointer;
+  font-size: 30px;
+}
