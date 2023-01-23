@@ -4,6 +4,7 @@ import {
   FormControl,
   FormGroup,
   FormGroupDirective,
+  MinValidator,
   NgForm,
   Validators,
 } from '@angular/forms';
@@ -11,6 +12,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { RegisterService } from 'src/app/services/register.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -44,7 +46,8 @@ export class RegisterComponent implements OnInit {
     private readonly fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
-    private authSvc: AuthService
+    private authSvc: AuthService,
+    private registerSvc: RegisterService
   ) {}
 
   ngOnInit(): void {
@@ -53,12 +56,13 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    const { email, name, password, phone, ConfirmPass } =
+    const { email, firstName, lastName, password, phone, ConfirmPass } =
       this.registerForm.value;
 
     if (
       email == '' ||
-      name == '' ||
+      firstName == '' ||
+      lastName == '' ||
       password == '' ||
       phone == '' ||
       ConfirmPass == ''
@@ -73,21 +77,44 @@ export class RegisterComponent implements OnInit {
       this.toastr.error('Las Contraseñas No coinsiden', 'Error');
       return;
     }
-    this.toastr.success(
-      'Su cuenta fue creada satisfactoriamente',
-      'Felicitaiones!'
+    if (phone.length !== 9) {
+      this.toastr.error(
+        'El numero de telefono tiene que tener 9 caracteres',
+        'Error'
+      );
+      return;
+    }
+    const register = {
+      email: email,
+      password: password,
+      first_name: firstName,
+      last_name: lastName,
+      phone: phone,
+    };
+    this.registerSvc.register(register).subscribe(
+      (data) => {
+        this.toastr.success(
+          'Su cuenta fue creada satisfactoriamente',
+          'Felicitaiones!'
+        );
+        console.log('Form =>', data);
+        this.router.navigate(['login']);
+      },
+      (error) => {
+        console.log(error);
+        this.registerForm.reset();
+      }
     );
-    console.log('Form =>', this.registerForm.value);
-    this.router.navigate(['login']);
   }
 
   initForm() {
     return this.fb.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
-      name: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       ConfirmPass: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.minLength(9)]],
     });
   }
 }

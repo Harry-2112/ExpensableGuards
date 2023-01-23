@@ -1,58 +1,82 @@
-<h4>Transactions <i class="fa fa-filter filter" (click)="status_filter()"></i></h4>
-
-<form class="form" *ngIf="filter.status === true">
-  <h6 class="mt-3">Category</h6>
-  <label *ngFor="let item of categories">
-    <input type="checkbox" name="categories[]" (click)="categories_filter(item.id, $event)" [value]="item.id">
-    {{item.name}}
-  </label>
-
-  <h6 class="mt-3">Amount</h6>
-  <div class="row">
-    <div class="col-6">
-      <label>MIN</label>
-      <input type="number" class="form-control" name="min" [(ngModel)]="filter.min" (keyup)="filter_transactions()">
-    </div>
-    <div class="col-6">
-      <label>MAX</label>
-      <input type="number" class="form-control" name="max" [(ngModel)]="filter.max" (keyup)="filter_transactions()">
+<!-- <div class="container">
+  <h5>Category</h5>
+  <div class="my-3" #categori>
+    <div class="form-check form-check-inline" >
+      <input class="form-check-input" type="checkbox">
+      <label class="form-check-label"></label>
     </div>
   </div>
 
-  <h6 class="mt-3">Date</h6>
-  <div class="row">
-    <div class="col-6">
-      <label>FROM</label>
-      <input type="date" class="form-control" name="from" [(ngModel)]="filter.from" (change)="filter_transactions()">
+  <h5>Amount</h5>
+  <div class="my-3">
+    <div class="row g-2">
+      <div class="col-md">
+        <div class="form-floating">
+          MIN
+          <input type="number" class="form-control leng" #min>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          MAX
+          <input type="number" class="form-control leng" #max>
+        </div>
+      </div>
     </div>
-    <div class="col-6">
-      <label>TO</label>
-      <input type="date" class="form-control" name="to" [(ngModel)]="filter.to" (change)="filter_transactions()">
-    </div>
-  </div>
-</form>
-<ul class="list-group mt-3">
-  <div *ngFor="let item of transactions">
-    <li class="list-group-item d-flex justify-content-between bg-light" *ngIf="item.operations.length > 0">
-      <span class="fs-4 fw-bold">{{create_date(item.date) | date:'dd'}}</span>
-      <div class="ms-4 me-auto">
-        <span>{{create_date(item.date) | date:'EEEE'}}</span>
-        <h6>{{create_date(item.date) | date:'MMMM, y'}}</h6>
-      </div>
-      <span class="fs-5 fw-bold" *ngIf="item.type === 'expense'">-{{item.amount | currency:'USD'}}</span>
-      <span class="fs-5 fw-bold" *ngIf="item.type === 'income'">+{{item.amount | currency:'USD'}}</span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between" *ngFor="let i of item.operations">
-      <div class="icon-transaction text-center">
-        <i [ngClass]="[search_icon(i.category_id)]"></i>
-      </div>
-      <div class="ms-4 me-auto">
-        <span>{{search_name(i.category_id)}}</span>
-        <h6>{{i.description}}</h6>
-      </div>
-      <span class="fs-5 fw-bold" *ngIf="i.type === 'expense'">-{{i.amount | currency:'USD'}}</span>
-      <span class="fs-5 fw-bold" *ngIf="i.type === 'income'">+{{i.amount | currency:'USD'}}</span>
-    </li>
   </div>
 
-</ul>
+  <div class="my-3">
+    <h5>Date</h5>
+    <div class="row g-2">
+      <div class="col-md">
+        <div class="form-floating">
+          FROM
+          <input type="date" class="form-control leng" #firsDate>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          TO
+          <input type="date" class="form-control leng" #endDate>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="card" id="global" (click)="log()">
+  <div *ngFor="let element of transacciones">
+    <div class="card-header">
+      <div class="fecha">
+        <h3>{{element.date | date:'d'}}</h3>
+      </div>
+      <div class="content">
+        <p>{{element.date | date:'EEEE'}}</p>
+        <h6>{{element.date | date:'MMMM, y'}}</h6>
+      </div>
+      <div class="dinero">
+        <h5 class="">suma</h5>
+      </div>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="icon">
+          <i class="fa fa-bank" *ngIf="element.icon=='bank'"></i>
+          <i class="fa-solid fa-money-bill" *ngIf="element.icon=='bill'"></i>
+          <i class="fa fa-shopping-cart" *ngIf="element.icon=='cart'"></i>
+          <i class="fa fa-car" *ngIf="element.icon=='car'"></i>
+          <i class="fa-solid fa-school" *ngIf="element.icon=='education'"></i>
+          <i class="fa-solid fa-gamepad" *ngIf="element.icon=='game'"></i>
+        </div>
+        <div class="content">
+          <h4>{{element.name}}</h4>
+          <span class="fs-12">{{element.notes}}</span>
+        </div>
+        <div class="precio">
+          <h5 class="">{{element.amount | currency:'USD'}}</h5>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

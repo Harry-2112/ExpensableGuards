@@ -14,7 +14,9 @@ import { AuthService } from './services/auth.service';
 
 import { ToastrModule } from 'ngx-toastr';
 import { ExpensableModule } from './expensable/expensable.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CategoriasService } from './services/categorias.service';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,12 +32,18 @@ import { HttpClientModule } from '@angular/common/http';
     ToastrModule.forRoot(),
     ExpensableModule,
     HttpClientModule,
+    ScrollingModule,
   ],
   providers: [
     AuthService,
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' },
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CategoriasService,
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],

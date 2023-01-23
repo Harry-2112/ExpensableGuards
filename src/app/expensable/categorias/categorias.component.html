@@ -1,3 +1,4 @@
+<!-- <app-create-new-category *ngIf="modal" (cerrar)="abrirModal()"></app-create-new-category> -->
 <div class="container">
   <div class="iten1">
     <app-nav-categori></app-nav-categori>
@@ -12,22 +13,28 @@
           <span>Total Expense</span>
         </div>
         <div class="container-cards">
-          <div class="card border-{{item.color}} mx-3 my-3" *ngFor="let item of categories">
-            <div class="icono text-{{item.color}}">
-              <i class="{{item.icon}}"></i>
+          <div class="card mx-3 my-3" *ngFor="let item of categories" [ngStyle]="{'border-color':item.color}">
+            <div class="icono" [ngStyle]="{'color':item.color}">
+              <i class="fa fa-bank" *ngIf="item.icon=='bank'"></i>
+              <i class="fa-solid fa-money-bill" *ngIf="item.icon=='bill'"></i>
+              <i class="fa fa-shopping-cart" *ngIf="item.icon=='cart'"></i>
+              <i class="fa fa-car" *ngIf="item.icon=='car'"></i>
+              <i class="fa-solid fa-school" *ngIf="item.icon=='education'"></i>
+              <i class="fa-solid fa-gamepad" *ngIf="item.icon=='game'"></i>
             </div>
             <div class="content">
               <span>{{item.name | titlecase}}</span>
-              <h2>{{item.amount | currency:'USD'}}</h2>
+              <h2 [ngClass]="{'text-danger':item.amount<0}">{{item.amount | currency:'USD'}}</h2>
             </div>
           </div>
 
-
-          <div class="addItem">
+          <!-- Modal -->
+          <dialog-overview-example></dialog-overview-example>
+          <!-- <div class="addItem" (click)="abrirModal()">
             <div class="card mx-3 my-3 border-secondary add">
               <i class="fa fa-plus text-secondary" aria-hidden="true"></i>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -35,20 +42,5 @@
   </div>
   <div class="iten2">
     <app-aside></app-aside>
-  </div>
-</div>
-
-
-<div class="modal fade" id="modal_category" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">New Category</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <app-create-new-category (newcategoryevent)="newcategory($event)"></app-create-new-category>
-      </div>
-    </div>
   </div>
 </div>

@@ -1,0 +1,44 @@
+.content .my_modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 6%;
+}
+
+.content-color,
+.content-item {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  place-content: center;
+}
+
+.color {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+}
+
+#content_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#close {
+  border: none;
+  background: #fff;
+}
+
+.form-check,
+label {
+  display: grid;
+  place-content: center;
+}
+
+#content_select_icon .content-item .form-check {
+  padding: 0;
+}
+
+#content_select_icon .content-item .form-check label {
+  font-size: 25px;
+}

@@ -1,0 +1,29 @@
+.card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-content: center;
+  height: 100px;
+}
+
+.card {
+  display: grid;
+  place-content: center;
+  font-size: 30px;
+}
+
+.addItem {
+  cursor: pointer;
+}
+
+.addItem {
+  list-style: none;
+}
+
+.add {
+  border-style: dashed;
+}
+
+.add i {
+  font-size: 30px;
+  grid-column: 2;
+}

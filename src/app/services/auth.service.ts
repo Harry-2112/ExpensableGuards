@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Router } from '@angular/router';
 
 const helper = new JwtHelperService();
 
@@ -12,9 +11,10 @@ const helper = new JwtHelperService();
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
     this.checkToken();
   }
+
   get isLogget(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
@@ -31,7 +31,6 @@ export class AuthService {
       catchError((err) => this.habdlerError(err))
     );
   }
-
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('name');

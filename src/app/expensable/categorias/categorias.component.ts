@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CategoriasService } from 'src/app/services/categorias.service';
 
 @Component({
   selector: 'app-categorias',
@@ -6,15 +7,42 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./categorias.component.css'],
 })
 export class CategoriasComponent implements OnInit {
-  ngOnInit(): void {}
-  total = 1250;
-  categories = [
+  constructor(private categoriasSvc: CategoriasService) {}
+  categories!: any;
+  modal = false;
+  abrirModal() {
+    this.modal ? (this.modal = false) : (this.modal = true);
+  }
+
+  ngOnInit(): void {
+    this.categoriasSvc.get().subscribe((data) => {
+      this.categories = data;
+      this.categories.forEach((e: any) => {
+        e.amount = 0;
+        e.transactions.forEach((iten: any) => {
+          e.amount += parseInt(iten.amount);
+        });
+        if (e.transaction_type != 'income') {
+          e.amount = e.amount * -1;
+        }
+        this.total = this.total + e.amount;
+      });
+      console.log(this.categories);
+    });
+  }
+  total = 0;
+
+  newcategory(category: string) {
+    this.categories.push(JSON.parse(category));
+  }
+
+  catego = [
     {
       id: 1,
       name: 'Rent',
       amount: 500,
       type: 'expense',
-      color: 'secondary',
+      color: 'secondary=green',
       icon: 'fa fa-bank',
     },
     {
@@ -22,7 +50,7 @@ export class CategoriasComponent implements OnInit {
       name: 'Groceries',
       amount: 100,
       type: 'expense',
-      color: 'info',
+      color: 'info="blue',
       icon: 'fa fa-shopping-cart',
     },
     {
@@ -58,7 +86,4 @@ export class CategoriasComponent implements OnInit {
       icon: 'fa fa-book',
     },
   ];
-  newcategory(category: string) {
-    this.categories.push(JSON.parse(category));
-  }
 }

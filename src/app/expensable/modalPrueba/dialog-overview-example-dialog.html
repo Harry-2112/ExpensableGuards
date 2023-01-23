@@ -1,0 +1,67 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Favorite Animal</mat-label>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div> -->
+<div class="content">
+  <form class="my_modal" (submit)="onSubmit(nombre.value,type.value,color,item)">
+    <div id="content_title">
+      <h2>New Category</h2>
+      <button id="close" (click)="onNoClick()"><i class="fa fa-close"></i></button>
+    </div>
+    <div id="content_name">
+      <div class="pb-2">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" required #nombre>
+      </div>
+    </div>
+    <div id="content_type">
+      <div class="pb-2">
+        <label for="type" class="form-label">type transaction</label>
+        <mat-form-field appearance="fill">
+          <mat-label>Type transaction</mat-label>
+          <mat-select required #type>
+            <mat-option value="income">Income</mat-option>
+            <mat-option value="expense">Expense</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <input type="text" class="form-control" id="type" > -->
+      </div>
+    </div>
+    <div id="content_select_color">
+      <h5>Color</h5>
+      <div class="content-color" #color>
+        <div class="form-check mx-2 my-2" *ngFor="let item of colors">
+          <input class="form-check-input" type="radio" name="SelectColor" [ngStyle]="{'background':item}" required
+            #color>
+        </div>
+      </div>
+    </div>
+    <div id="content_select_icon">
+      <h5>icon</h5>
+      <div class="content-item" #item>
+        <div class="form-check my-2" *ngFor="let item of itens">
+          <input type="radio" class="btn-check" name="SelectItem" id="{{item}}" autocomplete="off" required>
+          <label class="btn btn-outline-secondary color" for="{{item}}">
+            <i class="fa fa-bank" *ngIf="item=='bank'"></i>
+            <i class="fa-solid fa-money-bill" *ngIf="item=='bill'"></i>
+            <i class="fa fa-shopping-cart" *ngIf="item=='cart'"></i>
+            <i class="fa fa-car" *ngIf="item=='car'"></i>
+            <i class="fa-solid fa-school" *ngIf="item=='education'"></i>
+            <i class="fa-solid fa-gamepad" *ngIf="item=='game'"></i>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div id="content_btn">
+      <button type="submit" class="btn btn-primary w-100 mt-3">Create</button>
+    </div>
+  </form>
+</div>

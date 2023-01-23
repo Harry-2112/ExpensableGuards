@@ -23,6 +23,7 @@ const routes: Routes = [
       { path: '**', component: CategoriasComponent },
     ],
   },
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

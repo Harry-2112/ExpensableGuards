@@ -11,12 +11,19 @@ import { AppRoutingModule } from '../app-routing.module';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { TransaccionesComponent } from './transacciones/transacciones.component';
 import { PresupuestoComponent } from './presupuesto/presupuesto.component';
-import { CalendarioComponent } from './calendario/calendario.component';
+
 import { NavCategoriComponent } from './nav-categori/nav-categori.component';
 import { AsideComponent } from './aside/aside.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { CreateNewCategoryComponent } from './create-new-category/create-new-category.component';
+import { CalendarioComponent } from './calendario/calendario.component';
+import {
+  DialogOverviewExample,
+  DialogOverviewExampleDialog,
+} from './modalPrueba/dialog-overview-example';
+import { MatNativeDateModule } from '@angular/material/core';
+import { AngularMaterialModule } from '../angular-material.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -27,21 +34,25 @@ import { CreateNewCategoryComponent } from './create-new-category/create-new-cat
     CalendarioComponent,
     NavCategoriComponent,
     AsideComponent,
-    CreateNewCategoryComponent,
+    DialogOverviewExample,
+    DialogOverviewExampleDialog,
   ],
   imports: [
     CommonModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
+    MatDialogModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatNativeDateModule,
+    AngularMaterialModule,
     ScrollingModule,
   ],
-  exports: [PrincipalComponent],
+  exports: [PrincipalComponent, DialogOverviewExample],
 })
 export class ExpensableModule {}
